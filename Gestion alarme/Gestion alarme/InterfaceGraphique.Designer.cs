@@ -1,6 +1,6 @@
 ﻿namespace Gestion_alarme
 {
-    partial class Form1
+    partial class InterfaceGraphique
     {
         /// <summary>
         /// Required designer variable.

@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace Gestion_alarme
 {
-    public partial class Form1 : Form
+    public partial class InterfaceGraphique : Form
     {
-        public Form1()
+        public InterfaceGraphique()
         {
             InitializeComponent();
         }
