@@ -76,6 +76,7 @@
             // 
             // lstTypeInter
             // 
+            this.lstTypeInter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.lstTypeInter.FormattingEnabled = true;
             this.lstTypeInter.Location = new System.Drawing.Point(118, 90);
             this.lstTypeInter.Name = "lstTypeInter";
@@ -98,6 +99,8 @@
             this.SiteSinistre.Size = new System.Drawing.Size(114, 20);
             this.SiteSinistre.TabIndex = 5;
             this.SiteSinistre.Text = "Zone touchée";
+            this.SiteSinistre.Enter += new System.EventHandler(this.SiteSinistre_Enter);
+            this.SiteSinistre.Leave += new System.EventHandler(this.SiteSinistre_Leave);
             // 
             // txtLieu
             // 
@@ -109,7 +112,7 @@
             // lblRemarques
             // 
             this.lblRemarques.AutoSize = true;
-            this.lblRemarques.Location = new System.Drawing.Point(51, 206);
+            this.lblRemarques.Location = new System.Drawing.Point(51, 191);
             this.lblRemarques.Name = "lblRemarques";
             this.lblRemarques.Size = new System.Drawing.Size(61, 13);
             this.lblRemarques.TabIndex = 7;
@@ -117,26 +120,27 @@
             // 
             // rtxtRemarques
             // 
-            this.rtxtRemarques.Location = new System.Drawing.Point(54, 222);
+            this.rtxtRemarques.Location = new System.Drawing.Point(54, 207);
             this.rtxtRemarques.Name = "rtxtRemarques";
-            this.rtxtRemarques.Size = new System.Drawing.Size(292, 166);
+            this.rtxtRemarques.Size = new System.Drawing.Size(292, 181);
             this.rtxtRemarques.TabIndex = 8;
             this.rtxtRemarques.Text = "";
             // 
             // lstInterCourantes
             // 
+            this.lstInterCourantes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.lstInterCourantes.FormattingEnabled = true;
-            this.lstInterCourantes.Location = new System.Drawing.Point(54, 416);
+            this.lstInterCourantes.Location = new System.Drawing.Point(60, 477);
             this.lstInterCourantes.Name = "lstInterCourantes";
             this.lstInterCourantes.Size = new System.Drawing.Size(130, 21);
             this.lstInterCourantes.TabIndex = 9;
-            this.lstInterCourantes.Text = "Interventions en cours";
+            this.lstInterCourantes.Enter += new System.EventHandler(this.lstInterCourantes_Enter);
             // 
             // lblStatus
             // 
             this.lblStatus.AutoSize = true;
             this.lblStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblStatus.Location = new System.Drawing.Point(50, 450);
+            this.lblStatus.Location = new System.Drawing.Point(56, 410);
             this.lblStatus.Name = "lblStatus";
             this.lblStatus.Size = new System.Drawing.Size(56, 20);
             this.lblStatus.TabIndex = 10;
@@ -144,7 +148,7 @@
             // 
             // txtStatus
             // 
-            this.txtStatus.Location = new System.Drawing.Point(54, 473);
+            this.txtStatus.Location = new System.Drawing.Point(60, 433);
             this.txtStatus.Name = "txtStatus";
             this.txtStatus.ReadOnly = true;
             this.txtStatus.Size = new System.Drawing.Size(100, 20);
@@ -153,17 +157,18 @@
             // btnChangeStatus
             // 
             this.btnChangeStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnChangeStatus.Location = new System.Drawing.Point(54, 509);
+            this.btnChangeStatus.Location = new System.Drawing.Point(216, 473);
             this.btnChangeStatus.Name = "btnChangeStatus";
-            this.btnChangeStatus.Size = new System.Drawing.Size(130, 26);
+            this.btnChangeStatus.Size = new System.Drawing.Size(130, 27);
             this.btnChangeStatus.TabIndex = 12;
             this.btnChangeStatus.Text = "Changer le status";
             this.btnChangeStatus.UseVisualStyleBackColor = true;
+            this.btnChangeStatus.Click += new System.EventHandler(this.btnChangeStatus_Click);
             // 
             // lblAlarmeSDIS
             // 
             this.lblAlarmeSDIS.AutoSize = true;
-            this.lblAlarmeSDIS.Location = new System.Drawing.Point(470, 47);
+            this.lblAlarmeSDIS.Location = new System.Drawing.Point(430, 47);
             this.lblAlarmeSDIS.Name = "lblAlarmeSDIS";
             this.lblAlarmeSDIS.Size = new System.Drawing.Size(70, 13);
             this.lblAlarmeSDIS.TabIndex = 13;
@@ -171,19 +176,21 @@
             // 
             // lstSDIS
             // 
+            this.lstSDIS.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.lstSDIS.DropDownWidth = 150;
             this.lstSDIS.FormattingEnabled = true;
-            this.lstSDIS.Location = new System.Drawing.Point(546, 43);
+            this.lstSDIS.Location = new System.Drawing.Point(506, 43);
             this.lstSDIS.Name = "lstSDIS";
-            this.lstSDIS.Size = new System.Drawing.Size(97, 21);
+            this.lstSDIS.Size = new System.Drawing.Size(137, 21);
             this.lstSDIS.TabIndex = 14;
-            this.lstSDIS.Text = "Choisir SDIS";
+            this.lstSDIS.SelectedIndexChanged += new System.EventHandler(this.lstSDIS_SelectedIndexChanged);
             // 
             // lstEngagement
             // 
             this.lstEngagement.FormattingEnabled = true;
-            this.lstEngagement.Location = new System.Drawing.Point(473, 81);
+            this.lstEngagement.Location = new System.Drawing.Point(433, 81);
             this.lstEngagement.Name = "lstEngagement";
-            this.lstEngagement.Size = new System.Drawing.Size(170, 199);
+            this.lstEngagement.Size = new System.Drawing.Size(210, 199);
             this.lstEngagement.TabIndex = 15;
             // 
             // grpMoyens
@@ -214,6 +221,7 @@
             this.btnQuittance.TabIndex = 18;
             this.btnQuittance.Text = "Quittancer";
             this.btnQuittance.UseVisualStyleBackColor = true;
+            this.btnQuittance.Click += new System.EventHandler(this.btnQuittance_Click);
             // 
             // Form1
             // 
@@ -257,7 +265,6 @@
         private System.Windows.Forms.TextBox txtLieu;
         private System.Windows.Forms.Label lblRemarques;
         private System.Windows.Forms.RichTextBox rtxtRemarques;
-        private System.Windows.Forms.ComboBox lstInterCourantes;
         private System.Windows.Forms.Label lblStatus;
         private System.Windows.Forms.TextBox txtStatus;
         private System.Windows.Forms.Button btnChangeStatus;
@@ -267,6 +274,7 @@
         private System.Windows.Forms.GroupBox grpMoyens;
         private System.Windows.Forms.Button btnTrain;
         private System.Windows.Forms.Button btnQuittance;
+        private System.Windows.Forms.ComboBox lstInterCourantes;
     }
 }
 
