@@ -52,7 +52,9 @@
   <ItemGroup>
     <Compile Include="Alert.cs" />
     <Compile Include="Connection_db.cs" />
-    <Compile Include="InterfaceGraphique.cs" />
+    <Compile Include="InterfaceGraphique.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="InterfaceGraphique.Designer.cs">
       <DependentUpon>InterfaceGraphique.cs</DependentUpon>
     </Compile>

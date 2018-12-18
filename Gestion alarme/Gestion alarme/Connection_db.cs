@@ -13,9 +13,21 @@ namespace Gestion_alarme
     /// </summary>
     class Connection_db
     {
-        MySqlConnection connectionString = new MySqlConnection("server=localhost;user id=root;database=alarme");
+        //instancie un objet de type MySqlConnection
+        public MySqlConnection conn = new MySqlConnection();
+        //MySqlConnection connectionString = new MySqlConnection("server=localhost;user id=root;database=alarme");
 
-        public void OpenConnection()
+        public Connection_db()
+        {
+            //Pour ouvrir la connexion on utilise le string ci-dessous
+            string connectionString = "server=localhost;user id=root;database=alarme";
+            conn = new MySqlConnection(connectionString);
+        }
+
+
+
+
+       /* public void OpenConnection()
         {
             connectionString.Open();
         }
@@ -23,7 +35,7 @@ namespace Gestion_alarme
         public void CloseConnection()
         {
             connectionString.Close();
-        }
+        }*/
 
     }
 

@@ -214,8 +214,9 @@
             this.btnQuittance.TabIndex = 18;
             this.btnQuittance.Text = "Quittancer";
             this.btnQuittance.UseVisualStyleBackColor = true;
+            this.btnQuittance.Click += new System.EventHandler(this.btnQuittance_Click);
             // 
-            // Form1
+            // InterfaceGraphique
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -239,7 +240,7 @@
             this.Controls.Add(this.lblTypeInter);
             this.Controls.Add(this.lblQui);
             this.Controls.Add(this.txtQui);
-            this.Name = "Form1";
+            this.Name = "InterfaceGraphique";
             this.Text = "Form1";
             this.ResumeLayout(false);
             this.PerformLayout();
