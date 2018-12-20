@@ -13,6 +13,7 @@ namespace Gestion_alarme
 {
     public partial class InterfaceGraphique : Form
     {
+
         Connection_db connection = new Connection_db();
 
         public InterfaceGraphique()
@@ -22,7 +23,8 @@ namespace Gestion_alarme
 
         private void btnQuittance_Click(object sender, EventArgs e)
         {
-            string rqSQL = "INSERT INTO grades (NomGrade) VALUES('Caporal');";
+
+            string rqSQL = "";
             //Sert à envoyer la requête voulue à la classe qui s'en occupe
             MySqlDataAdapter data = new MySqlDataAdapter(rqSQL, connection.conn);
             DataSet Ds = new DataSet();

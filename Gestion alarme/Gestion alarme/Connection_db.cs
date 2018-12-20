@@ -22,12 +22,6 @@ namespace Gestion_alarme
             string connectionString = "server=localhost;user id=root;database=alarme";
             conn = new MySqlConnection(connectionString);
         }
-
-
-
-
-
-
     }
 
 
