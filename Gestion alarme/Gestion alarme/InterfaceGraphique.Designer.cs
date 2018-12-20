@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InterfaceGraphique));
             this.txtQui = new System.Windows.Forms.TextBox();
             this.lblQui = new System.Windows.Forms.Label();
             this.lblTypeInter = new System.Windows.Forms.Label();
@@ -240,6 +241,7 @@
             this.Controls.Add(this.lblTypeInter);
             this.Controls.Add(this.lblQui);
             this.Controls.Add(this.txtQui);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "InterfaceGraphique";
             this.Text = "Form1";
             this.ResumeLayout(false);

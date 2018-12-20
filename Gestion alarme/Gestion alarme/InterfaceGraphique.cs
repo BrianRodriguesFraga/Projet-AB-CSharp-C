@@ -22,7 +22,7 @@ namespace Gestion_alarme
 
         private void btnQuittance_Click(object sender, EventArgs e)
         {
-            string rqSQL = "INSERT INTO alarme () VALUES();";
+            string rqSQL = "INSERT INTO grades (NomGrade) VALUES('Caporal');";
             //Sert à envoyer la requête voulue à la classe qui s'en occupe
             MySqlDataAdapter data = new MySqlDataAdapter(rqSQL, connection.conn);
             DataSet Ds = new DataSet();
