@@ -45,8 +45,17 @@
             this.lstSDIS = new System.Windows.Forms.ComboBox();
             this.lstEngagement = new System.Windows.Forms.ListBox();
             this.grpMoyens = new System.Windows.Forms.GroupBox();
+            this.btnTonneP1000 = new System.Windows.Forms.Button();
             this.btnTrain = new System.Windows.Forms.Button();
             this.btnQuittance = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
+            this.button5 = new System.Windows.Forms.Button();
+            this.button6 = new System.Windows.Forms.Button();
+            this.button7 = new System.Windows.Forms.Button();
+            this.grpMoyens.SuspendLayout();
             this.SuspendLayout();
             // 
             // txtQui
@@ -190,17 +199,36 @@
             this.lstEngagement.FormattingEnabled = true;
             this.lstEngagement.Location = new System.Drawing.Point(433, 81);
             this.lstEngagement.Name = "lstEngagement";
+            this.lstEngagement.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
             this.lstEngagement.Size = new System.Drawing.Size(210, 199);
             this.lstEngagement.TabIndex = 15;
             // 
             // grpMoyens
             // 
+            this.grpMoyens.Controls.Add(this.button7);
+            this.grpMoyens.Controls.Add(this.button6);
+            this.grpMoyens.Controls.Add(this.button5);
+            this.grpMoyens.Controls.Add(this.button4);
+            this.grpMoyens.Controls.Add(this.button3);
+            this.grpMoyens.Controls.Add(this.button2);
+            this.grpMoyens.Controls.Add(this.button1);
+            this.grpMoyens.Controls.Add(this.btnTonneP1000);
             this.grpMoyens.Location = new System.Drawing.Point(684, 44);
             this.grpMoyens.Name = "grpMoyens";
             this.grpMoyens.Size = new System.Drawing.Size(332, 296);
             this.grpMoyens.TabIndex = 16;
             this.grpMoyens.TabStop = false;
             this.grpMoyens.Text = "Moyens disponibles";
+            // 
+            // btnTonneP1000
+            // 
+            this.btnTonneP1000.BackgroundImage = global::Gestion_alarme.Properties.Resources.TP1000;
+            this.btnTonneP1000.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnTonneP1000.Location = new System.Drawing.Point(6, 19);
+            this.btnTonneP1000.Name = "btnTonneP1000";
+            this.btnTonneP1000.Size = new System.Drawing.Size(133, 61);
+            this.btnTonneP1000.TabIndex = 0;
+            this.btnTonneP1000.UseVisualStyleBackColor = true;
             // 
             // btnTrain
             // 
@@ -222,6 +250,76 @@
             this.btnQuittance.Text = "Quittancer";
             this.btnQuittance.UseVisualStyleBackColor = true;
             this.btnQuittance.Click += new System.EventHandler(this.btnQuittance_Click);
+            // 
+            // button1
+            // 
+            this.button1.BackgroundImage = global::Gestion_alarme.Properties.Resources.TP1000;
+            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.button1.Location = new System.Drawing.Point(145, 19);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(133, 61);
+            this.button1.TabIndex = 1;
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // button2
+            // 
+            this.button2.BackgroundImage = global::Gestion_alarme.Properties.Resources.TP1000;
+            this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.button2.Location = new System.Drawing.Point(6, 86);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(133, 61);
+            this.button2.TabIndex = 2;
+            this.button2.UseVisualStyleBackColor = true;
+            // 
+            // button3
+            // 
+            this.button3.BackgroundImage = global::Gestion_alarme.Properties.Resources.TP1000;
+            this.button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.button3.Location = new System.Drawing.Point(145, 86);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(133, 61);
+            this.button3.TabIndex = 3;
+            this.button3.UseVisualStyleBackColor = true;
+            // 
+            // button4
+            // 
+            this.button4.BackgroundImage = global::Gestion_alarme.Properties.Resources.TP1000;
+            this.button4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.button4.Location = new System.Drawing.Point(6, 153);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(133, 61);
+            this.button4.TabIndex = 4;
+            this.button4.UseVisualStyleBackColor = true;
+            // 
+            // button5
+            // 
+            this.button5.BackgroundImage = global::Gestion_alarme.Properties.Resources.TP1000;
+            this.button5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.button5.Location = new System.Drawing.Point(145, 153);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(133, 61);
+            this.button5.TabIndex = 5;
+            this.button5.UseVisualStyleBackColor = true;
+            // 
+            // button6
+            // 
+            this.button6.BackgroundImage = global::Gestion_alarme.Properties.Resources.TP1000;
+            this.button6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.button6.Location = new System.Drawing.Point(6, 220);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(133, 61);
+            this.button6.TabIndex = 6;
+            this.button6.UseVisualStyleBackColor = true;
+            // 
+            // button7
+            // 
+            this.button7.BackgroundImage = global::Gestion_alarme.Properties.Resources.TP1000;
+            this.button7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.button7.Location = new System.Drawing.Point(145, 220);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(133, 61);
+            this.button7.TabIndex = 7;
+            this.button7.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -249,6 +347,7 @@
             this.Controls.Add(this.txtQui);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.grpMoyens.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -275,6 +374,14 @@
         private System.Windows.Forms.Button btnTrain;
         private System.Windows.Forms.Button btnQuittance;
         private System.Windows.Forms.ComboBox lstInterCourantes;
+        private System.Windows.Forms.Button btnTonneP1000;
+        private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button1;
     }
 }
 

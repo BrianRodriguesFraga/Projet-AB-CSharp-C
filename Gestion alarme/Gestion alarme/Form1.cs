@@ -14,6 +14,7 @@ namespace Gestion_alarme
     {
         #region varibles
         private bool erreur = false;
+        private bool alerte = false;
         #endregion variables
 
         public Form1()
@@ -28,7 +29,7 @@ namespace Gestion_alarme
 
             #region Liste intervention
             //ajout des item dans la liste des intervention
-            //TO DO : à adapter Avec la DB
+            //TO DO : à adapter avec la DB
             lstTypeInter.Items.Add("FEU");
             lstTypeInter.Items.Add("SAU");
             lstTypeInter.Items.Add("INO");
@@ -44,7 +45,7 @@ namespace Gestion_alarme
 
             #region Status d'intervention
             //ajout des item dans la liste du status d'intervention
-            //TO DO : à adapter Avec la DB
+            //TO DO : à adapter avec la DB
             lstInterCourantes.Items.Add("En cours...");
             lstInterCourantes.Items.Add("Terminée !");
             lstInterCourantes.Items.Add("Annulée !");
@@ -53,10 +54,10 @@ namespace Gestion_alarme
 
             #region Liste SDIS
             //ajout des item dans la liste des SDIS
-            //TO DO : à adapter Avec la DB
-            lstSDIS.Items.Add("de la Broye - Vully");
+            //TO DO : à adapter avec la DB
+            lstSDIS.Items.Add("Broye - Vully");
             lstSDIS.Items.Add("Haute-Broye");
-            lstSDIS.Items.Add("régional du Nord vaudois");
+            lstSDIS.Items.Add("Région du Nord vaudois");
             lstSDIS.Items.Add("Ste-Croix/Pied-de-la-Côte");
             lstSDIS.Items.Add("Plaine de l'Orbe");
             lstSDIS.Items.Add("Gros-de-Vaud");
@@ -71,7 +72,7 @@ namespace Gestion_alarme
             lstSDIS.Items.Add("Morget");
             lstSDIS.Items.Add("Sorge");
             lstSDIS.Items.Add("Chamberonne");
-            lstSDIS.Items.Add("de Malley, Prilly et Renens");
+            lstSDIS.Items.Add("Malley, Prilly et Renens");
             lstSDIS.Items.Add("Haut-Talent");
             lstSDIS.Items.Add("Mèbre");
             lstSDIS.Items.Add("Lausanne - Epalinges");
@@ -89,16 +90,16 @@ namespace Gestion_alarme
 
         private void btnQuittance_Click(object sender, EventArgs e)
         {
-            //variables
+            //met erreur à false pour vérifier par la suite si il y a des erreurs dans les champs
             erreur = false;
 
+            #region Verification des champs
             //processus de vérification de tout les champs
             if (txtQui.TextLength <= 0) { MessageBox.Show("Le champ 'Qui ?' est vide !", "Erreur ! Champ vide.", MessageBoxButtons.OK, MessageBoxIcon.Error); erreur = true; }
             else if (lstTypeInter.SelectedIndex < 0) { MessageBox.Show("Aucun index n'a été selectionner dans 'Type Intervention' !", "Erreur ! Index non selectionné.", MessageBoxButtons.OK, MessageBoxIcon.Error); erreur = true; }
             else if (txtLieu.TextLength <= 0) { MessageBox.Show("Le champ 'Lieu' est vide !", "Erreur ! Champ vide.", MessageBoxButtons.OK, MessageBoxIcon.Error); erreur = true; }
             else if (txtStatus.Text == "") { MessageBox.Show("Le champ 'Status de l'intervention' est vide ! \nSelectionnez le type de status", "Erreur ! Champ vide.", MessageBoxButtons.OK, MessageBoxIcon.Error); erreur = true; }
-            
-
+            //si un champ est vide, demande à l'utilisateur une confirmation
             if ((SiteSinistre.TextLength <= 0 || SiteSinistre.Text == "Zone touchée") && erreur == false) {
                 var SiteSinistreRep = MessageBox.Show("Le champ 'Zone touchée ?' est vide ! Voulez-vous continuez ?", "Champ vide ?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (SiteSinistreRep != DialogResult.Yes) { erreur = true; }
@@ -108,11 +109,11 @@ namespace Gestion_alarme
                 var rtxtRemarquesRep = MessageBox.Show("Le champ 'Remarque' est vide ! Voulez-vous continuez ?", "Champ vide ?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (rtxtRemarquesRep != DialogResult.Yes) { erreur = true; }
             }
+            #endregion Verification des champs
 
-            
+            #region Validation de l'alerte
             //Si il y a aucune erreur, on lance l'alerte
-            //Sinon, renvoie un message d'attention
-            if (erreur == false)
+            if (erreur == false && alerte == false)
             {
                 //Affiche le message que l'alerte à bien été envoyé
                 MessageBox.Show("L'alerte a été envoyée !", "Envoyée !", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -125,19 +126,66 @@ namespace Gestion_alarme
                 rtxtRemarques.Enabled = false;
                 lstSDIS.Enabled = false;
                 btnTrain.Enabled = false;
-                btnQuittance.Enabled = false;
+                btnQuittance.Text = "Terminer l'intervention";
+                alerte = true;
+
+                //TO DO : mettre la requete pour la base de données
             }
+
+            //Si l'alerte est déjà envoyé et qu'il y a aucune erreur dans les champs
+            else if (erreur == false && alerte == true)
+            {
+                //Et si le status est défini sur Terminée ou Annulée, on reactive tout les champs et les remets à zéro pour être prêt à lancer une nouvelle alerte
+                if (txtStatus.Text == "Terminée !" || txtStatus.Text == "Annulée !")
+                {
+                    MessageBox.Show("L'intervention sur les lieux est terminer.", "Terminer !", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    txtQui.Enabled = true;
+                    txtQui.Text = "";
+                    lstTypeInter.Enabled = true;
+                    lstTypeInter.Text = "";
+                    SiteSinistre.Enabled = true;
+                    SiteSinistre.Text = "";
+                    txtLieu.Enabled = true;
+                    txtLieu.Text = "";
+                    rtxtRemarques.Enabled = true;
+                    rtxtRemarques.Text = "";
+                    lstSDIS.Enabled = true;
+                    rtxtRemarques.Text = "";
+                    btnTrain.Enabled = true;
+                    lstTypeInter.SelectedIndex = -1;
+                    lstSDIS.SelectedIndex = -1;
+                    lstEngagement.Items.Clear();
+                    SiteSinistre.Text = "Zone touchée";
+                    SiteSinistre.ForeColor = Color.Gray;
+                    btnQuittance.Text = "Quittancer";
+                    alerte = false;
+
+                    //TO DO : mettre la requette pour la base de données
+                }
+                //sinon, renvoie un message d'erreur
+                else
+                {
+                    MessageBox.Show("Le status de l'intervention n'est pas terminée ou annulée.", "Erreur !", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            #endregion Validation de l'alerte
         }
 
         private void lstSDIS_SelectedIndexChanged(object sender, EventArgs e)
         {
             //afficher la liste des personnes engagées selon le SDIS sélectionné (exemple pour les 2 premiers)
             //TO DO : à adapter Avec la DB
+            #region Liste des personnes des SDIS
             if (lstSDIS.SelectedIndex == 0)
             {
                 lstEngagement.Items.Clear();
                 lstEngagement.Items.Add("Paul Cherer");
                 lstEngagement.Items.Add("Jean-Loup Ferrari");
+                lstEngagement.Items.Add("Jean-jean Jean");
+                lstEngagement.Items.Add("David Lafarche");
+                lstEngagement.Items.Add("Pierre Terter");
+                lstEngagement.Items.Add("Bidule Chose");
             }
 
             if (lstSDIS.SelectedIndex == 1)
@@ -146,9 +194,10 @@ namespace Gestion_alarme
                 lstEngagement.Items.Add("Benoit Mouttier");
                 lstEngagement.Items.Add("Sacha PIEEEEEERE");
             }
-
+            #endregion Liste des personnes des SDIS
         }
 
+        #region Focus hover
         //Si le focus est sur SiteSinistre
         private void SiteSinistre_Enter(object sender, EventArgs e)
         {
@@ -179,6 +228,7 @@ namespace Gestion_alarme
             }
             lstInterCourantes.ForeColor = Color.Black;
         }
+        #endregion Focus hover
 
         private void btnChangeStatus_Click(object sender, EventArgs e)
         {
