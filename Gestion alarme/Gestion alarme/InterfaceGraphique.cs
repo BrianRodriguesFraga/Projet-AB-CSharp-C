@@ -123,13 +123,13 @@ namespace Gestion_alarme
             erreur = false;
             string rqSQL = "";
             #endregion variables local
-
+            /*
             //Sert à envoyer la requête voulue à la classe qui s'en occupe
             MySqlDataAdapter data = new MySqlDataAdapter(rqSQL, connection.conn);
             DataSet Ds = new DataSet();
             Ds.Reset();
             data.Fill(Ds, rqSQL);
-
+            */
             #region Verification des champs
             //processus de vérification de tout les champs
             if (txtQui.TextLength <= 0) { MessageBox.Show("Le champ 'Qui ?' est vide !", "Erreur ! Champ vide.", MessageBoxButtons.OK, MessageBoxIcon.Error); erreur = true; }
@@ -274,6 +274,11 @@ namespace Gestion_alarme
                 txtStatus.Text = lstInterCourantes.SelectedItem.ToString();
                 lstInterCourantes.SelectedIndex = -1;
             }
+        }
+
+        private void btnTonneP1000_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
