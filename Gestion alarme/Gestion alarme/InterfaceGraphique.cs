@@ -13,11 +13,18 @@ namespace Gestion_alarme
 {
     public partial class InterfaceGraphique : Form
     {
-        #region varibles
+        #region variables
         private bool erreur = false;
         private bool alerte = false;
         Connection_db connection = new Connection_db();
+        string rqSQL = "";
         #endregion variables
+
+
+        public Requetes()
+        {
+
+        }
 
         public InterfaceGraphique()
         {
@@ -48,10 +55,29 @@ namespace Gestion_alarme
             #region Status d'intervention
             //ajout des item dans la liste du status d'intervention
             //TO DO : à adapter avec la DB
-            lstInterCourantes.Items.Add("En cours...");
+            rqSQL = "SELECT * from alarme_status";
+            //Sert à envoyer la requête voulue à la classe qui s'en occupe
+            MySqlDataAdapter data = new MySqlDataAdapter(rqSQL, connection.conn);
+            DataSet Ds = new DataSet();
+            Ds.Reset();
+            data.Fill(Ds, rqSQL);
+
+
+
+            MySqlDataReader reader = rqSQL;
+
+
+
+
+
+
+
+
+
+            /*lstInterCourantes.Items.Add("En cours...");
             lstInterCourantes.Items.Add("Terminée !");
             lstInterCourantes.Items.Add("Annulée !");
-            lstInterCourantes.Items.Add("Entrainement...");
+            lstInterCourantes.Items.Add("Entrainement...");*/
             #endregion Status d'intervention
 
             #region Liste SDIS
