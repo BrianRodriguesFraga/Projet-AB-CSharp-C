@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -13,11 +14,23 @@ namespace Gestion_alarme
 {
     public partial class InterfaceGraphique : Form
     {
-        #region varibles
+        #region variables
         private bool erreur = false;
         private bool alerte = false;
         Connection_db connection = new Connection_db();
+        string rqSQL = "";
+        string connString = "Server=localhost; Database=alarme; Uid=root; Pwd=;";
+        List<String> statusInter = new List<String>();
+        List<String> SDIS = new List<String>();
+        List<String> Personnel = new List<String>();
+        List<String> TypeInter = new List<String>();
         #endregion variables
+
+
+        /* public Requetes()
+         {
+
+         }*/
 
         public InterfaceGraphique()
         {
@@ -31,61 +44,94 @@ namespace Gestion_alarme
 
             #region Liste intervention
             //ajout des item dans la liste des intervention
-            //TO DO : à adapter avec la DB
-            lstTypeInter.Items.Add("FEU");
-            lstTypeInter.Items.Add("SAU");
-            lstTypeInter.Items.Add("INO");
-            lstTypeInter.Items.Add("DIV");
-            lstTypeInter.Items.Add("TEC");
-            lstTypeInter.Items.Add("REN");
-            lstTypeInter.Items.Add("PIO");
-            lstTypeInter.Items.Add("POL");
-            lstTypeInter.Items.Add("CHI");
-            lstTypeInter.Items.Add("RAD");
+
+            rqSQL = "SELECT Nature, Ampleur from type_sinistre";
+            MySqlConnection typeSinistre = new MySqlConnection(connString);
+            MySqlCommand rqSinistre = new MySqlCommand(rqSQL, typeSinistre);
+            typeSinistre.Open();
+            MySqlDataReader readSinistre;
+            readSinistre = rqSinistre.ExecuteReader();
+            // Appeler le reader avant d'accéder aux données.
+            while (readSinistre.Read())
+            {
+                TypeInter.Add(readSinistre.GetString(0) + " " + readSinistre.GetString(1));
+            }
+            // Fermer après lecture.
+            readSinistre.Close();
+            // Fermer la connection après utilisation.
+            typeSinistre.Close();
+
+
+            //foreach pour entrer les valeurs pour les champs depuis la liste
+            foreach (string sinistre in TypeInter)
+            {
+                lstTypeInter.Items.Add(sinistre);
+            }
+
             #endregion Liste intervention
 
-            #region Status d'intervention
             //ajout des item dans la liste du status d'intervention
             //TO DO : à adapter avec la DB
-            lstInterCourantes.Items.Add("En cours...");
-            lstInterCourantes.Items.Add("Terminée !");
-            lstInterCourantes.Items.Add("Annulée !");
-            lstInterCourantes.Items.Add("Entrainement...");
+            /*rqSQL = "SELECT * from alarme_status";
+              //Sert à envoyer la requête voulue à la classe qui s'en occupe
+              MySqlDataAdapter data = new MySqlDataAdapter(rqSQL, connection.conn);
+              DataSet Ds = new DataSet();
+              Ds.Reset();
+              data.Fill(Ds, rqSQL);*/
+
+            #region Status d'intervention
+
+            rqSQL = "SELECT Status from alarme_status";
+                MySqlConnection statusI = new MySqlConnection(connString);
+                MySqlCommand rqStatus = new MySqlCommand(rqSQL, statusI);
+                statusI.Open();
+                MySqlDataReader readStatus;
+                readStatus = rqStatus.ExecuteReader();
+                // Always call Read before accessing data.
+                while (readStatus.Read())
+                {
+                    statusInter.Add(readStatus.GetString(0));
+                }
+                // always call Close when done reading.
+                readStatus.Close();
+                // Close the connection when done with it.
+                statusI.Close();
+
+
+            //foreach pour entrer les valeurs pour les champs depuis la liste
+            foreach(string status in statusInter)
+            {
+                lstInterCourantes.Items.Add(status);
+            }
+
             #endregion Status d'intervention
 
             #region Liste SDIS
             //ajout des item dans la liste des SDIS
-            //TO DO : à adapter avec la DB
-            lstSDIS.Items.Add("Broye - Vully");
-            lstSDIS.Items.Add("Haute-Broye");
-            lstSDIS.Items.Add("Région du Nord vaudois");
-            lstSDIS.Items.Add("Ste-Croix/Pied-de-la-Côte");
-            lstSDIS.Items.Add("Plaine de l'Orbe");
-            lstSDIS.Items.Add("Gros-de-Vaud");
-            lstSDIS.Items.Add("Vallorbe Région");
-            lstSDIS.Items.Add("Oron-Jorat");
-            lstSDIS.Items.Add("Région Venoge");
-            lstSDIS.Items.Add("Vallée de Joux");
-            lstSDIS.Items.Add("Nyon - Dôle");
-            lstSDIS.Items.Add("Terre Sainte");
-            lstSDIS.Items.Add("Gland-Serine");
-            lstSDIS.Items.Add("Etraz Région");
-            lstSDIS.Items.Add("Morget");
-            lstSDIS.Items.Add("Sorge");
-            lstSDIS.Items.Add("Chamberonne");
-            lstSDIS.Items.Add("Malley, Prilly et Renens");
-            lstSDIS.Items.Add("Haut-Talent");
-            lstSDIS.Items.Add("Mèbre");
-            lstSDIS.Items.Add("Lausanne - Epalinges");
-            lstSDIS.Items.Add("Ouest-Lavaux");
-            lstSDIS.Items.Add("Coeur de Lavaux");
-            lstSDIS.Items.Add("Riviera");
-            lstSDIS.Items.Add("Haut-Lac");
-            lstSDIS.Items.Add("Chablais");
-            lstSDIS.Items.Add("Les Salines");
-            lstSDIS.Items.Add("Fortifications");
-            lstSDIS.Items.Add("Alpin");
-            lstSDIS.Items.Add("SDISPE");
+            rqSQL = "SELECT NomCaserne from caserne";
+            MySqlConnection caserne = new MySqlConnection(connString);
+            MySqlCommand rqCaserne = new MySqlCommand(rqSQL, caserne);
+            caserne.Open();
+            MySqlDataReader readCaserne;
+            readCaserne = rqCaserne.ExecuteReader();
+            // Appeler le reader avant d'accéder aux données.
+            while (readCaserne.Read())
+            {
+                SDIS.Add(readCaserne.GetString(0));
+            }
+            // Fermer après lecture.
+            readCaserne.Close();
+            // Fermer la connection après utilisation.
+            caserne.Close();
+
+
+            //foreach pour entrer les valeurs pour les champs depuis la liste
+            foreach (string nomCaserne in SDIS)
+            {
+                lstSDIS.Items.Add(nomCaserne);
+            }
+
+
             #endregion Liste SDIS
         }
 
@@ -96,13 +142,13 @@ namespace Gestion_alarme
             erreur = false;
             string rqSQL = "";
             #endregion variables local
-            
+
             //Sert à envoyer la requête voulue à la classe qui s'en occupe
             MySqlDataAdapter data = new MySqlDataAdapter(rqSQL, connection.conn);
             DataSet Ds = new DataSet();
             Ds.Reset();
             data.Fill(Ds, rqSQL);
-            
+
             #region Verification des champs
             //processus de vérification de tout les champs
             if (txtQui.TextLength <= 0) { MessageBox.Show("Le champ 'Qui ?' est vide !", "Erreur ! Champ vide.", MessageBoxButtons.OK, MessageBoxIcon.Error); erreur = true; }
@@ -127,7 +173,7 @@ namespace Gestion_alarme
             {
                 //Affiche le message que l'alerte à bien été envoyé
                 MessageBox.Show("L'alerte a été envoyée !", "Envoyée !", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                
+
                 //on verrouille tous les champs necessaire qui ne doivent pas être modifier
                 txtQui.Enabled = false;
                 lstTypeInter.Enabled = false;
@@ -187,23 +233,34 @@ namespace Gestion_alarme
             //afficher la liste des personnes engagées selon le SDIS sélectionné (exemple pour les 2 premiers)
             //TO DO : à adapter Avec la DB
             #region Liste des personnes des SDIS
-            if (lstSDIS.SelectedIndex == 0)
+            lstEngagement.Items.Clear();
+            Personnel.Clear();
+            string selectionCaserne = lstSDIS.Text;
+
+            //ajout des item dans la liste des SDIS
+            rqSQL = "SELECT SPNom, SPPrenom from personnels where Caserne_idCaserne =  (select idCaserne from caserne where NomCaserne = '"+ selectionCaserne +"');";
+            MySqlConnection personnels = new MySqlConnection(connString);
+            MySqlCommand rqPersonnel = new MySqlCommand(rqSQL, personnels);
+            personnels.Open();
+            MySqlDataReader readPersonnels;
+            readPersonnels = rqPersonnel.ExecuteReader();
+            // Appeler le reader avant d'accéder aux données.
+            while (readPersonnels.Read())
             {
-                lstEngagement.Items.Clear();
-                lstEngagement.Items.Add("Paul Cherer");
-                lstEngagement.Items.Add("Jean-Loup Ferrari");
-                lstEngagement.Items.Add("Jean-jean Jean");
-                lstEngagement.Items.Add("David Lafarche");
-                lstEngagement.Items.Add("Pierre Terter");
-                lstEngagement.Items.Add("Bidule Chose");
+                Personnel.Add(readPersonnels.GetString(1) + " " + readPersonnels.GetString(0));
+            }
+            // Fermer après lecture.
+            readPersonnels.Close();
+            // Fermer la connection après utilisation.
+            personnels.Close();
+            //foreach pour entrer les valeurs pour les champs depuis la liste
+            foreach (string nomPersonnels in Personnel)
+            {
+                lstEngagement.Items.Add(nomPersonnels);
             }
 
-            if (lstSDIS.SelectedIndex == 1)
-            {
-                lstEngagement.Items.Clear();
-                lstEngagement.Items.Add("Benoit Mouttier");
-                lstEngagement.Items.Add("Sacha PIEEEEEERE");
-            }
+
+
             #endregion Liste des personnes des SDIS
         }
 
@@ -272,7 +329,7 @@ namespace Gestion_alarme
                     btnVMSR.Visible = true;
                     btnVOfficier.Visible = true;
                     break;
-                
+
                 //SAU
                 case 1:
                     btnVEchelle25S.Visible = true;
@@ -306,10 +363,10 @@ namespace Gestion_alarme
                     btnVOfficier.Visible = false;
                     break;
             }
-            
-            
 
-            
+
+
+
         }
     }
 }
