@@ -22,6 +22,8 @@ namespace Gestion_alarme
         string connString = "Server=localhost; Database=alarme; Uid=root; Pwd=;";
         List<String> statusInter = new List<String>();
         List<String> SDIS = new List<String>();
+        List<String> Personnel = new List<String>();
+        List<String> TypeInter = new List<String>();
         #endregion variables
 
 
@@ -42,18 +44,30 @@ namespace Gestion_alarme
 
             #region Liste intervention
             //ajout des item dans la liste des intervention
-            //TO DO : à adapter avec la DB
-            lstTypeInter.Items.Add("FEU");
-            lstTypeInter.Items.Add("SAU");
-            lstTypeInter.Items.Add("INO");
-            lstTypeInter.Items.Add("DIV");
-            lstTypeInter.Items.Add("TEC");
-            lstTypeInter.Items.Add("POL");
-            lstTypeInter.Items.Add("REN");
-            lstTypeInter.Items.Add("PIO");
-            lstTypeInter.Items.Add("POL");
-            lstTypeInter.Items.Add("CHI");
-            lstTypeInter.Items.Add("RAD");
+
+            rqSQL = "SELECT Nature, Ampleur from type_sinistre";
+            MySqlConnection typeSinistre = new MySqlConnection(connString);
+            MySqlCommand rqSinistre = new MySqlCommand(rqSQL, typeSinistre);
+            typeSinistre.Open();
+            MySqlDataReader readSinistre;
+            readSinistre = rqSinistre.ExecuteReader();
+            // Appeler le reader avant d'accéder aux données.
+            while (readSinistre.Read())
+            {
+                TypeInter.Add(readSinistre.GetString(0) + " " + readSinistre.GetString(1));
+            }
+            // Fermer après lecture.
+            readSinistre.Close();
+            // Fermer la connection après utilisation.
+            typeSinistre.Close();
+
+
+            //foreach pour entrer les valeurs pour les champs depuis la liste
+            foreach (string sinistre in TypeInter)
+            {
+                lstTypeInter.Items.Add(sinistre);
+            }
+
             #endregion Liste intervention
 
             //ajout des item dans la liste du status d'intervention
@@ -67,7 +81,7 @@ namespace Gestion_alarme
 
             #region Status d'intervention
 
-                rqSQL = "SELECT Status from alarme_status";
+            rqSQL = "SELECT Status from alarme_status";
                 MySqlConnection statusI = new MySqlConnection(connString);
                 MySqlCommand rqStatus = new MySqlCommand(rqSQL, statusI);
                 statusI.Open();
@@ -219,23 +233,34 @@ namespace Gestion_alarme
             //afficher la liste des personnes engagées selon le SDIS sélectionné (exemple pour les 2 premiers)
             //TO DO : à adapter Avec la DB
             #region Liste des personnes des SDIS
-            if (lstSDIS.SelectedIndex == 0)
+            lstEngagement.Items.Clear();
+            Personnel.Clear();
+            string selectionCaserne = lstSDIS.Text;
+
+            //ajout des item dans la liste des SDIS
+            rqSQL = "SELECT SPNom, SPPrenom from personnels where Caserne_idCaserne =  (select idCaserne from caserne where NomCaserne = '"+ selectionCaserne +"');";
+            MySqlConnection personnels = new MySqlConnection(connString);
+            MySqlCommand rqPersonnel = new MySqlCommand(rqSQL, personnels);
+            personnels.Open();
+            MySqlDataReader readPersonnels;
+            readPersonnels = rqPersonnel.ExecuteReader();
+            // Appeler le reader avant d'accéder aux données.
+            while (readPersonnels.Read())
             {
-                lstEngagement.Items.Clear();
-                lstEngagement.Items.Add("Paul Cherer");
-                lstEngagement.Items.Add("Jean-Loup Ferrari");
-                lstEngagement.Items.Add("Jean-jean Jean");
-                lstEngagement.Items.Add("David Lafarche");
-                lstEngagement.Items.Add("Pierre Terter");
-                lstEngagement.Items.Add("Bidule Chose");
+                Personnel.Add(readPersonnels.GetString(1) + " " + readPersonnels.GetString(0));
+            }
+            // Fermer après lecture.
+            readPersonnels.Close();
+            // Fermer la connection après utilisation.
+            personnels.Close();
+            //foreach pour entrer les valeurs pour les champs depuis la liste
+            foreach (string nomPersonnels in Personnel)
+            {
+                lstEngagement.Items.Add(nomPersonnels);
             }
 
-            if (lstSDIS.SelectedIndex == 1)
-            {
-                lstEngagement.Items.Clear();
-                lstEngagement.Items.Add("Benoit Mouttier");
-                lstEngagement.Items.Add("Sacha PIEEEEEERE");
-            }
+
+            
             #endregion Liste des personnes des SDIS
         }
 
