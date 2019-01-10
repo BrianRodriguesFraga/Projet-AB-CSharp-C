@@ -116,7 +116,7 @@
             // 
             this.txtLieu.Location = new System.Drawing.Point(118, 138);
             this.txtLieu.Name = "txtLieu";
-            this.txtLieu.Size = new System.Drawing.Size(136, 20);
+            this.txtLieu.Size = new System.Drawing.Size(228, 20);
             this.txtLieu.TabIndex = 6;
             // 
             // lblRemarques

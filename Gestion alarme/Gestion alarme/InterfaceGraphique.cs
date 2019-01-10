@@ -140,7 +140,6 @@ namespace Gestion_alarme
             #region variables local
             //met erreur à false pour vérifier par la suite si il y a des erreurs dans les champs
             erreur = false;
-            string rqSQL = "";
             #endregion variables local
             /*
             //Sert à envoyer la requête voulue à la classe qui s'en occupe
@@ -238,7 +237,7 @@ namespace Gestion_alarme
             string selectionCaserne = lstSDIS.Text;
 
             //ajout des item dans la liste des SDIS
-            rqSQL = "SELECT SPNom, SPPrenom from personnels where Caserne_idCaserne =  (select idCaserne from caserne where NomCaserne = '"+ selectionCaserne +"');";
+            rqSQL = "SELECT SPNom, SPPrenom, SPStatus from personnels inner join sp_status on personnels.SP_status_idSP_status = sp_status.idSP_status where Caserne_idCaserne =  (select idCaserne from caserne where NomCaserne = '" + selectionCaserne + "');";
             MySqlConnection personnels = new MySqlConnection(connString);
             MySqlCommand rqPersonnel = new MySqlCommand(rqSQL, personnels);
             personnels.Open();
@@ -247,7 +246,7 @@ namespace Gestion_alarme
             // Appeler le reader avant d'accéder aux données.
             while (readPersonnels.Read())
             {
-                Personnel.Add(readPersonnels.GetString(1) + " " + readPersonnels.GetString(0));
+                Personnel.Add(readPersonnels.GetString(1) + " " + readPersonnels.GetString(0) + " " + readPersonnels.GetString(2));
             }
             // Fermer après lecture.
             readPersonnels.Close();
