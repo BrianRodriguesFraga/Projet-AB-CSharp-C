@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -18,13 +19,16 @@ namespace Gestion_alarme
         private bool alerte = false;
         Connection_db connection = new Connection_db();
         string rqSQL = "";
+        string connString = "Server=localhost; Database=alarme; Uid=root; Pwd=;";
+        List<String> statusInter = new List<String>();
+        List<String> SDIS = new List<String>();
         #endregion variables
 
 
-        public Requetes()
-        {
+        /* public Requetes()
+         {
 
-        }
+         }*/
 
         public InterfaceGraphique()
         {
@@ -52,67 +56,68 @@ namespace Gestion_alarme
             lstTypeInter.Items.Add("RAD");
             #endregion Liste intervention
 
-            #region Status d'intervention
             //ajout des item dans la liste du status d'intervention
             //TO DO : à adapter avec la DB
-            rqSQL = "SELECT * from alarme_status";
-            //Sert à envoyer la requête voulue à la classe qui s'en occupe
-            MySqlDataAdapter data = new MySqlDataAdapter(rqSQL, connection.conn);
-            DataSet Ds = new DataSet();
-            Ds.Reset();
-            data.Fill(Ds, rqSQL);
+            /*rqSQL = "SELECT * from alarme_status";
+              //Sert à envoyer la requête voulue à la classe qui s'en occupe
+              MySqlDataAdapter data = new MySqlDataAdapter(rqSQL, connection.conn);
+              DataSet Ds = new DataSet();
+              Ds.Reset();
+              data.Fill(Ds, rqSQL);*/
 
+            #region Status d'intervention
 
+                rqSQL = "SELECT Status from alarme_status";
+                MySqlConnection statusI = new MySqlConnection(connString);
+                MySqlCommand rqStatus = new MySqlCommand(rqSQL, statusI);
+                statusI.Open();
+                MySqlDataReader readStatus;
+                readStatus = rqStatus.ExecuteReader();
+                // Always call Read before accessing data.
+                while (readStatus.Read())
+                {
+                    statusInter.Add(readStatus.GetString(0));
+                }
+                // always call Close when done reading.
+                readStatus.Close();
+                // Close the connection when done with it.
+                statusI.Close();
+            
 
-            MySqlDataReader reader = rqSQL;
+            //foreach pour entrer les valeurs pour les champs depuis la liste
+            foreach(string status in statusInter)
+            {
+                lstInterCourantes.Items.Add(status);
+            }
 
-
-
-
-
-
-
-
-
-            /*lstInterCourantes.Items.Add("En cours...");
-            lstInterCourantes.Items.Add("Terminée !");
-            lstInterCourantes.Items.Add("Annulée !");
-            lstInterCourantes.Items.Add("Entrainement...");*/
             #endregion Status d'intervention
 
             #region Liste SDIS
             //ajout des item dans la liste des SDIS
-            //TO DO : à adapter avec la DB
-            lstSDIS.Items.Add("Broye - Vully");
-            lstSDIS.Items.Add("Haute-Broye");
-            lstSDIS.Items.Add("Région du Nord vaudois");
-            lstSDIS.Items.Add("Ste-Croix/Pied-de-la-Côte");
-            lstSDIS.Items.Add("Plaine de l'Orbe");
-            lstSDIS.Items.Add("Gros-de-Vaud");
-            lstSDIS.Items.Add("Vallorbe Région");
-            lstSDIS.Items.Add("Oron-Jorat");
-            lstSDIS.Items.Add("Région Venoge");
-            lstSDIS.Items.Add("Vallée de Joux");
-            lstSDIS.Items.Add("Nyon - Dôle");
-            lstSDIS.Items.Add("Terre Sainte");
-            lstSDIS.Items.Add("Gland-Serine");
-            lstSDIS.Items.Add("Etraz Région");
-            lstSDIS.Items.Add("Morget");
-            lstSDIS.Items.Add("Sorge");
-            lstSDIS.Items.Add("Chamberonne");
-            lstSDIS.Items.Add("Malley, Prilly et Renens");
-            lstSDIS.Items.Add("Haut-Talent");
-            lstSDIS.Items.Add("Mèbre");
-            lstSDIS.Items.Add("Lausanne - Epalinges");
-            lstSDIS.Items.Add("Ouest-Lavaux");
-            lstSDIS.Items.Add("Coeur de Lavaux");
-            lstSDIS.Items.Add("Riviera");
-            lstSDIS.Items.Add("Haut-Lac");
-            lstSDIS.Items.Add("Chablais");
-            lstSDIS.Items.Add("Les Salines");
-            lstSDIS.Items.Add("Fortifications");
-            lstSDIS.Items.Add("Alpin");
-            lstSDIS.Items.Add("SDISPE");
+            rqSQL = "SELECT NomCaserne from caserne";
+            MySqlConnection caserne = new MySqlConnection(connString);
+            MySqlCommand rqCaserne = new MySqlCommand(rqSQL, caserne);
+            caserne.Open();
+            MySqlDataReader readCaserne;
+            readCaserne = rqCaserne.ExecuteReader();
+            // Appeler le reader avant d'accéder aux données.
+            while (readCaserne.Read())
+            {
+                SDIS.Add(readCaserne.GetString(0));
+            }
+            // Fermer après lecture.
+            readCaserne.Close();
+            // Fermer la connection après utilisation.
+            caserne.Close();
+
+
+            //foreach pour entrer les valeurs pour les champs depuis la liste
+            foreach (string nomCaserne in SDIS)
+            {
+                lstSDIS.Items.Add(nomCaserne);
+            }
+
+           
             #endregion Liste SDIS
         }
 
