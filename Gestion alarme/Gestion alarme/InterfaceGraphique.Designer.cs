@@ -92,6 +92,7 @@
             this.lstTypeInter.Name = "lstTypeInter";
             this.lstTypeInter.Size = new System.Drawing.Size(136, 21);
             this.lstTypeInter.TabIndex = 3;
+            this.lstTypeInter.SelectedIndexChanged += new System.EventHandler(this.lstTypeInter_SelectedIndexChanged);
             // 
             // lblLieu
             // 
@@ -230,6 +231,7 @@
             this.btnVMSR.Size = new System.Drawing.Size(133, 61);
             this.btnVMSR.TabIndex = 7;
             this.btnVMSR.UseVisualStyleBackColor = true;
+            this.btnVMSR.Visible = false;
             // 
             // btnVOfficier
             // 
@@ -240,6 +242,7 @@
             this.btnVOfficier.Size = new System.Drawing.Size(133, 61);
             this.btnVOfficier.TabIndex = 6;
             this.btnVOfficier.UseVisualStyleBackColor = true;
+            this.btnVOfficier.Visible = false;
             // 
             // btnVEchelle30D
             // 
@@ -250,6 +253,7 @@
             this.btnVEchelle30D.Size = new System.Drawing.Size(133, 61);
             this.btnVEchelle30D.TabIndex = 5;
             this.btnVEchelle30D.UseVisualStyleBackColor = true;
+            this.btnVEchelle30D.Visible = false;
             // 
             // btnVEchelle25S
             // 
@@ -260,6 +264,7 @@
             this.btnVEchelle25S.Size = new System.Drawing.Size(133, 61);
             this.btnVEchelle25S.TabIndex = 4;
             this.btnVEchelle25S.UseVisualStyleBackColor = true;
+            this.btnVEchelle25S.Visible = false;
             // 
             // btnVTransportPM
             // 
@@ -270,6 +275,7 @@
             this.btnVTransportPM.Size = new System.Drawing.Size(133, 61);
             this.btnVTransportPM.TabIndex = 3;
             this.btnVTransportPM.UseVisualStyleBackColor = true;
+            this.btnVTransportPM.Visible = false;
             // 
             // btnVTonneP6000
             // 
@@ -280,6 +286,7 @@
             this.btnVTonneP6000.Size = new System.Drawing.Size(133, 61);
             this.btnVTonneP6000.TabIndex = 2;
             this.btnVTonneP6000.UseVisualStyleBackColor = true;
+            this.btnVTonneP6000.Visible = false;
             // 
             // btnVTonneP2000
             // 
@@ -290,6 +297,7 @@
             this.btnVTonneP2000.Size = new System.Drawing.Size(133, 61);
             this.btnVTonneP2000.TabIndex = 1;
             this.btnVTonneP2000.UseVisualStyleBackColor = true;
+            this.btnVTonneP2000.Visible = false;
             // 
             // btnVTonneP1000
             // 
@@ -300,7 +308,8 @@
             this.btnVTonneP1000.Size = new System.Drawing.Size(133, 61);
             this.btnVTonneP1000.TabIndex = 0;
             this.btnVTonneP1000.UseVisualStyleBackColor = true;
-            this.btnVTonneP1000.Click += new System.EventHandler(this.btnTonneP1000_Click);
+            this.btnVTonneP1000.Visible = false;
+            this.btnVTonneP1000.Click += new System.EventHandler(this.btnVTonneP1000_Click);
             // 
             // btnTrain
             // 

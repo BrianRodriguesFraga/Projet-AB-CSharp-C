@@ -37,7 +37,6 @@ namespace Gestion_alarme
             lstTypeInter.Items.Add("INO");
             lstTypeInter.Items.Add("DIV");
             lstTypeInter.Items.Add("TEC");
-            lstTypeInter.Items.Add("POL");
             lstTypeInter.Items.Add("REN");
             lstTypeInter.Items.Add("PIO");
             lstTypeInter.Items.Add("POL");
@@ -97,13 +96,13 @@ namespace Gestion_alarme
             erreur = false;
             string rqSQL = "";
             #endregion variables local
-            /*
+            
             //Sert à envoyer la requête voulue à la classe qui s'en occupe
             MySqlDataAdapter data = new MySqlDataAdapter(rqSQL, connection.conn);
             DataSet Ds = new DataSet();
             Ds.Reset();
             data.Fill(Ds, rqSQL);
-            */
+            
             #region Verification des champs
             //processus de vérification de tout les champs
             if (txtQui.TextLength <= 0) { MessageBox.Show("Le champ 'Qui ?' est vide !", "Erreur ! Champ vide.", MessageBoxButtons.OK, MessageBoxIcon.Error); erreur = true; }
@@ -111,11 +110,11 @@ namespace Gestion_alarme
             else if (txtLieu.TextLength <= 0) { MessageBox.Show("Le champ 'Lieu' est vide !", "Erreur ! Champ vide.", MessageBoxButtons.OK, MessageBoxIcon.Error); erreur = true; }
             else if (txtStatus.Text == "") { MessageBox.Show("Le champ 'Status de l'intervention' est vide ! \nSelectionnez le type de status", "Erreur ! Champ vide.", MessageBoxButtons.OK, MessageBoxIcon.Error); erreur = true; }
             //si un champ est vide, demande à l'utilisateur une confirmation
-            if ((SiteSinistre.TextLength <= 0 || SiteSinistre.Text == "Zone touchée") && erreur == false) {
+            if ((SiteSinistre.TextLength <= 0 || SiteSinistre.Text == "Zone touchée") && (erreur == false && alerte == false)) {
                 var SiteSinistreRep = MessageBox.Show("Le champ 'Zone touchée ?' est vide ! Voulez-vous continuez ?", "Champ vide ?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (SiteSinistreRep != DialogResult.Yes) { erreur = true; }
             }
-            if (rtxtRemarques.TextLength <= 0 && erreur == false)
+            if (rtxtRemarques.TextLength <= 0 && (erreur == false && alerte == false))
             {
                 var rtxtRemarquesRep = MessageBox.Show("Le champ 'Remarque' est vide ! Voulez-vous continuez ?", "Champ vide ?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (rtxtRemarquesRep != DialogResult.Yes) { erreur = true; }
@@ -250,9 +249,67 @@ namespace Gestion_alarme
             }
         }
 
-        private void btnTonneP1000_Click(object sender, EventArgs e)
+        private void btnVTonneP1000_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void lstTypeInter_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //Permet d'afficher les boutons des véhicules selon le type d'intervention séléctionnée
+            int idTypeIntervention = -1;
+            idTypeIntervention = lstTypeInter.SelectedIndex;
+            switch (idTypeIntervention)
+            {
+                //Feu
+                case 0:
+                    btnVTonneP1000.Visible = true;
+                    btnVTonneP2000.Visible = true;
+                    btnVTonneP6000.Visible = true;
+                    btnVTransportPM.Visible = true;
+                    btnVEchelle25S.Visible = true;
+                    btnVEchelle30D.Visible = true;
+                    btnVMSR.Visible = true;
+                    btnVOfficier.Visible = true;
+                    break;
+                
+                //SAU
+                case 1:
+                    btnVEchelle25S.Visible = true;
+                    btnVEchelle30D.Visible = true;
+                    break;
+                //INO
+
+                //DIV
+
+                //TEC
+
+                //REN
+
+                //PIO
+
+                //POL
+
+                //CHI
+
+                //RAD
+
+                //par défaut
+                default:
+                    btnVTonneP1000.Visible = false;
+                    btnVTonneP2000.Visible = false;
+                    btnVTonneP6000.Visible = false;
+                    btnVTransportPM.Visible = false;
+                    btnVEchelle25S.Visible = false;
+                    btnVEchelle30D.Visible = false;
+                    btnVMSR.Visible = false;
+                    btnVOfficier.Visible = false;
+                    break;
+            }
+            
+            
+
+            
         }
     }
 }
