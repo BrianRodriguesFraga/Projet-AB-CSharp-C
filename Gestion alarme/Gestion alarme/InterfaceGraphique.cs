@@ -23,6 +23,7 @@ namespace Gestion_alarme
         List<String> statusInter = new List<String>();
         List<String> SDIS = new List<String>();
         List<String> Personnel = new List<String>();
+        List<String> Status = new List<String>();
         List<String> TypeInter = new List<String>();
         #endregion variables
 
@@ -230,8 +231,12 @@ namespace Gestion_alarme
         private void lstSDIS_SelectedIndexChanged(object sender, EventArgs e)
         {
             //afficher la liste des personnes engagées selon le SDIS sélectionné (exemple pour les 2 premiers)
-            //TO DO : à adapter Avec la DB
+            //TODO : à adapter Avec la DB
             #region Liste des personnes des SDIS
+            #region Variables locales
+            int increment = 0;
+            #endregion Variables locales
+
             lstEngagement.Items.Clear();
             Personnel.Clear();
             string selectionCaserne = lstSDIS.Text;
@@ -247,17 +252,25 @@ namespace Gestion_alarme
             while (readPersonnels.Read())
             {
                 Personnel.Add(readPersonnels.GetString(1) + " " + readPersonnels.GetString(0) + " " + readPersonnels.GetString(2));
+                Status.Add(readPersonnels.GetString(2));
             }
             // Fermer après lecture.
             readPersonnels.Close();
             // Fermer la connection après utilisation.
             personnels.Close();
             //foreach pour entrer les valeurs pour les champs depuis la liste
-            foreach (string nomPersonnels in Personnel)
+            foreach (string nomPersonnels in Personnel) 
             {
                 lstEngagement.Items.Add(nomPersonnels);
             }
-
+           /* foreach (string statusPers in Status)
+            {
+                if (statusPers == "Disponible")
+                {
+                    lstEngagement.Items.IndexOf(increment) = Color.Green;
+                }
+                increment ++;
+            }*/
 
 
             #endregion Liste des personnes des SDIS
