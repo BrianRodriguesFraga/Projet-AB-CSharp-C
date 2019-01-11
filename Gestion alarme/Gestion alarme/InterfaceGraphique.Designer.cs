@@ -309,7 +309,6 @@
             this.btnVTonneP1000.TabIndex = 0;
             this.btnVTonneP1000.UseVisualStyleBackColor = true;
             this.btnVTonneP1000.Visible = false;
-            this.btnVTonneP1000.Click += new System.EventHandler(this.btnVTonneP1000_Click);
             // 
             // btnTrain
             // 
