@@ -157,10 +157,10 @@ namespace Gestion_alarme
 
             #region Envoie requête db
             //Sert à envoyer la requête voulue à la classe qui s'en occupe
-            MySqlDataAdapter data = new MySqlDataAdapter(rqSQL, connection.conn);
+            /*MySqlDataAdapter data = new MySqlDataAdapter(rqSQL, connection.conn);
             DataSet Ds = new DataSet();
             Ds.Reset();
-            data.Fill(Ds, rqSQL);
+            data.Fill(Ds, rqSQL);*/
             #endregion Envoie requête db
 
             #region Validation de l'alerte
@@ -227,7 +227,6 @@ namespace Gestion_alarme
 
         private void lstSDIS_SelectedIndexChanged(object sender, EventArgs e)
         {
-            #region Liste des personnes des SDIS
             //afficher la liste des personnes engagées selon le SDIS sélectionné (exemple pour les 2 premiers)
             //TODO : à adapter Avec la DB
             #region Liste des personnes des SDIS
@@ -678,4 +677,6 @@ namespace Gestion_alarme
 '''''''''''''''''''''''';#+++++++++++@+++++++++++++#;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;#+++++++++#++++@,,+++++++##++++++++#;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;#+++++++#++++++++++++++++++++++++++++++++++++
 '''''''''''''''''''''''';#+++++++++++#+++++++++++++#;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;@+++++++++@++++@,:++++++#@++++++++#+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;#+++++++#++++++++++++++++++++++++++++++++++++
 '''''''''''''''''''''''';+++++++++++++++++++++++++++;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;#+++++++++#++++@,+++++++@#++++++++#;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;#+++++++#++++++++++++++++++++++++++++++++++++
- */
+*/ 
+
+

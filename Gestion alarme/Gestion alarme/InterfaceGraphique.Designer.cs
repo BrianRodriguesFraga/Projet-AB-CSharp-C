@@ -63,7 +63,7 @@
             // 
             this.txtQui.Location = new System.Drawing.Point(118, 44);
             this.txtQui.Name = "txtQui";
-            this.txtQui.Size = new System.Drawing.Size(136, 20);
+            this.txtQui.Size = new System.Drawing.Size(228, 20);
             this.txtQui.TabIndex = 0;
             // 
             // lblQui
@@ -90,7 +90,7 @@
             this.lstTypeInter.FormattingEnabled = true;
             this.lstTypeInter.Location = new System.Drawing.Point(118, 90);
             this.lstTypeInter.Name = "lstTypeInter";
-            this.lstTypeInter.Size = new System.Drawing.Size(136, 21);
+            this.lstTypeInter.Size = new System.Drawing.Size(108, 21);
             this.lstTypeInter.TabIndex = 3;
             this.lstTypeInter.SelectedIndexChanged += new System.EventHandler(this.lstTypeInter_SelectedIndexChanged);
             // 
@@ -105,7 +105,7 @@
             // 
             // SiteSinistre
             // 
-            this.SiteSinistre.Location = new System.Drawing.Point(260, 91);
+            this.SiteSinistre.Location = new System.Drawing.Point(232, 91);
             this.SiteSinistre.Name = "SiteSinistre";
             this.SiteSinistre.Size = new System.Drawing.Size(114, 20);
             this.SiteSinistre.TabIndex = 5;
@@ -133,7 +133,7 @@
             // 
             this.rtxtRemarques.Location = new System.Drawing.Point(54, 207);
             this.rtxtRemarques.Name = "rtxtRemarques";
-            this.rtxtRemarques.Size = new System.Drawing.Size(292, 181);
+            this.rtxtRemarques.Size = new System.Drawing.Size(292, 203);
             this.rtxtRemarques.TabIndex = 8;
             this.rtxtRemarques.Text = "";
             // 
@@ -202,7 +202,7 @@
             this.lstEngagement.Location = new System.Drawing.Point(433, 81);
             this.lstEngagement.Name = "lstEngagement";
             this.lstEngagement.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
-            this.lstEngagement.Size = new System.Drawing.Size(210, 199);
+            this.lstEngagement.Size = new System.Drawing.Size(210, 329);
             this.lstEngagement.TabIndex = 15;
             // 
             // grpMoyens
@@ -217,7 +217,7 @@
             this.grpMoyens.Controls.Add(this.btnVTonneP1000);
             this.grpMoyens.Location = new System.Drawing.Point(684, 44);
             this.grpMoyens.Name = "grpMoyens";
-            this.grpMoyens.Size = new System.Drawing.Size(332, 296);
+            this.grpMoyens.Size = new System.Drawing.Size(332, 366);
             this.grpMoyens.TabIndex = 16;
             this.grpMoyens.TabStop = false;
             this.grpMoyens.Text = "Moyens disponibles";
@@ -312,10 +312,10 @@
             // 
             // btnTrain
             // 
-            this.btnTrain.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTrain.Location = new System.Drawing.Point(684, 356);
+            this.btnTrain.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTrain.Location = new System.Drawing.Point(684, 473);
             this.btnTrain.Name = "btnTrain";
-            this.btnTrain.Size = new System.Drawing.Size(183, 23);
+            this.btnTrain.Size = new System.Drawing.Size(183, 27);
             this.btnTrain.TabIndex = 17;
             this.btnTrain.Text = "Mobiliser le train d\'intervention";
             this.btnTrain.UseVisualStyleBackColor = true;
