@@ -17,9 +17,14 @@ namespace Gestion_alarme
         #region Variables
         private bool erreur = false;
         private bool alerte = false;
-        Connection_db connection = new Connection_db();
+        int index = -1;
+        int indexOfX = -1;
+        int nombreV;
+        string nbrX;
+        string newNbrX;
         string rqSQL = "";
         string connString = "Server=localhost; Database=alarme; Uid=root; Pwd=;";
+        Connection_db connection = new Connection_db();
         List<String> statusInter = new List<String>();
         List<String> SDIS = new List<String>();
         List<String> Personnel = new List<String>();
@@ -228,12 +233,8 @@ namespace Gestion_alarme
         private void lstSDIS_SelectedIndexChanged(object sender, EventArgs e)
         {
             //afficher la liste des personnes engagées selon le SDIS sélectionné (exemple pour les 2 premiers)
-            //TODO : à adapter Avec la DB
+            
             #region Liste des personnes des SDIS
-            #region Variables locales
-            int increment = 0;
-            #endregion Variables locales
-
             lstEngagement.Items.Clear();
             Personnel.Clear();
             string selectionCaserne = lstSDIS.Text;
@@ -248,7 +249,7 @@ namespace Gestion_alarme
             // Appeler le reader avant d'accéder aux données.
             while (readPersonnels.Read())
             {
-                Personnel.Add(readPersonnels.GetString(1) + " " + readPersonnels.GetString(0) + " " + readPersonnels.GetString(2));
+                Personnel.Add(readPersonnels.GetString(1) + " " + readPersonnels.GetString(0) + "\t       (" + readPersonnels.GetString(2) + ")");
                 Status.Add(readPersonnels.GetString(2));
             }
             // Fermer après lecture.
@@ -260,16 +261,7 @@ namespace Gestion_alarme
             {
                 lstEngagement.Items.Add(nomPersonnels);
             }
-           /* foreach (string statusPers in Status)
-            {
-                if (statusPers == "Disponible")
-                {
-                    lstEngagement.Items.IndexOf(increment) = Color.Green;
-                }
-                increment ++;
-            }*/
-
-
+            
             #endregion Liste des personnes des SDIS
         }
 
@@ -440,6 +432,109 @@ namespace Gestion_alarme
         }
         #endregion Reset status séléctionné
 
+        #region Clic véhicules
+
+        private void btnVTonneP1000_Click(object sender, EventArgs e)
+        {
+            VehicleGestion("Tonne Pompe 1000L");
+        }
+
+        private void btnVTonneP2000_Click(object sender, EventArgs e)
+        {
+            VehicleGestion("Tonne Pompe 2000L");
+        }
+
+        private void btnVTonneP6000_Click(object sender, EventArgs e)
+        {
+            VehicleGestion("Tonne Pompe 6000L");
+        }
+
+        private void btnVTransportPM_Click(object sender, EventArgs e)
+        {
+            VehicleGestion("Transport PM");
+        }
+
+        private void btnVEchelle25S_Click(object sender, EventArgs e)
+        {
+            VehicleGestion("Echelle automobile 25M");
+        }
+
+        private void btnVEchelle30D_Click(object sender, EventArgs e)
+        {
+            VehicleGestion("Echelle automobile 30M");
+        }
+
+        private void btnVOfficier_Click(object sender, EventArgs e)
+        {
+            VehicleGestion("Officier");
+        }
+
+        private void btnVMSR_Click(object sender, EventArgs e)
+        {
+            VehicleGestion("Modulaire de secours");
+        }
+        #endregion Clic véhicules
+
+        #region Fonctions
+        int FindMyStringInList(ListBox lb, string searchString, int startIndex)
+        {
+            for (int i = startIndex; i < lb.Items.Count; ++i)
+            {
+                string lbString = lb.Items[i].ToString();
+                if (lbString.Contains(searchString))
+                    return i;
+            }
+            return -1;
+        }
+        void VehicleGestion(string Vehicle)
+        {
+            index = FindMyStringInList(lstVSelection, Vehicle, 0);
+            if (index >= 0)
+            {
+                nbrX = lstVSelection.Items[index].ToString();
+                if (nbrX.Contains("x"))
+                {
+                    if (rdbtnAdd.Checked)
+                    {
+                        indexOfX = nbrX.IndexOf("x") + 1;
+                        nombreV = Int32.Parse(nbrX.Substring(indexOfX));
+                        nombreV++;
+                    }
+                    if (rdbtnRemove.Checked)
+                    {
+                        int indexOfX = nbrX.IndexOf("x") + 1;
+                        nombreV = Int32.Parse(nbrX.Substring(indexOfX));
+                        nombreV--;
+
+                    }
+                    if (nombreV > 1)
+                    {
+                        newNbrX = Vehicle + " x" + nombreV;
+                    }
+                    else
+                    {
+                        newNbrX = Vehicle;
+                    }
+                    lstVSelection.Items[index] = newNbrX;
+                }
+                else
+                {
+                    if (rdbtnAdd.Checked)
+                    {
+                        lstVSelection.Items[index] = (Vehicle + " x2");
+                    }
+                    if (rdbtnRemove.Checked)
+                    {
+                        lstVSelection.Items.RemoveAt(index);
+                    }
+                }
+            }
+            else if (rdbtnAdd.Checked)
+            {
+                lstVSelection.Items.Add(Vehicle);
+            }
+        }
+        #endregion Fonctions
     }
 }
 

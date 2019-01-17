@@ -56,6 +56,10 @@
             this.btnVTonneP1000 = new System.Windows.Forms.Button();
             this.btnTrain = new System.Windows.Forms.Button();
             this.btnQuittance = new System.Windows.Forms.Button();
+            this.rdbtnAdd = new System.Windows.Forms.RadioButton();
+            this.rdbtnRemove = new System.Windows.Forms.RadioButton();
+            this.label1 = new System.Windows.Forms.Label();
+            this.lstVSelection = new System.Windows.Forms.ListBox();
             this.grpMoyens.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -141,7 +145,7 @@
             // 
             this.lstInterCourantes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.lstInterCourantes.FormattingEnabled = true;
-            this.lstInterCourantes.Location = new System.Drawing.Point(60, 477);
+            this.lstInterCourantes.Location = new System.Drawing.Point(60, 502);
             this.lstInterCourantes.Name = "lstInterCourantes";
             this.lstInterCourantes.Size = new System.Drawing.Size(130, 21);
             this.lstInterCourantes.TabIndex = 9;
@@ -151,7 +155,7 @@
             // 
             this.lblStatus.AutoSize = true;
             this.lblStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblStatus.Location = new System.Drawing.Point(56, 410);
+            this.lblStatus.Location = new System.Drawing.Point(56, 437);
             this.lblStatus.Name = "lblStatus";
             this.lblStatus.Size = new System.Drawing.Size(56, 20);
             this.lblStatus.TabIndex = 10;
@@ -159,16 +163,16 @@
             // 
             // txtStatus
             // 
-            this.txtStatus.Location = new System.Drawing.Point(60, 433);
+            this.txtStatus.Location = new System.Drawing.Point(60, 460);
             this.txtStatus.Name = "txtStatus";
             this.txtStatus.ReadOnly = true;
-            this.txtStatus.Size = new System.Drawing.Size(100, 20);
+            this.txtStatus.Size = new System.Drawing.Size(110, 20);
             this.txtStatus.TabIndex = 11;
             // 
             // btnChangeStatus
             // 
             this.btnChangeStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnChangeStatus.Location = new System.Drawing.Point(216, 473);
+            this.btnChangeStatus.Location = new System.Drawing.Point(216, 496);
             this.btnChangeStatus.Name = "btnChangeStatus";
             this.btnChangeStatus.Size = new System.Drawing.Size(130, 27);
             this.btnChangeStatus.TabIndex = 12;
@@ -179,7 +183,7 @@
             // lblAlarmeSDIS
             // 
             this.lblAlarmeSDIS.AutoSize = true;
-            this.lblAlarmeSDIS.Location = new System.Drawing.Point(430, 47);
+            this.lblAlarmeSDIS.Location = new System.Drawing.Point(394, 47);
             this.lblAlarmeSDIS.Name = "lblAlarmeSDIS";
             this.lblAlarmeSDIS.Size = new System.Drawing.Size(70, 13);
             this.lblAlarmeSDIS.TabIndex = 13;
@@ -190,19 +194,19 @@
             this.lstSDIS.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.lstSDIS.DropDownWidth = 150;
             this.lstSDIS.FormattingEnabled = true;
-            this.lstSDIS.Location = new System.Drawing.Point(506, 43);
+            this.lstSDIS.Location = new System.Drawing.Point(470, 43);
             this.lstSDIS.Name = "lstSDIS";
-            this.lstSDIS.Size = new System.Drawing.Size(137, 21);
+            this.lstSDIS.Size = new System.Drawing.Size(173, 21);
             this.lstSDIS.TabIndex = 14;
             this.lstSDIS.SelectedIndexChanged += new System.EventHandler(this.lstSDIS_SelectedIndexChanged);
             // 
             // lstEngagement
             // 
             this.lstEngagement.FormattingEnabled = true;
-            this.lstEngagement.Location = new System.Drawing.Point(433, 81);
+            this.lstEngagement.Location = new System.Drawing.Point(397, 81);
             this.lstEngagement.Name = "lstEngagement";
             this.lstEngagement.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
-            this.lstEngagement.Size = new System.Drawing.Size(210, 329);
+            this.lstEngagement.Size = new System.Drawing.Size(246, 329);
             this.lstEngagement.TabIndex = 15;
             // 
             // grpMoyens
@@ -226,78 +230,85 @@
             // 
             this.btnVMSR.BackgroundImage = global::Gestion_alarme.Properties.Resources.MSR;
             this.btnVMSR.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnVMSR.Location = new System.Drawing.Point(145, 220);
+            this.btnVMSR.Location = new System.Drawing.Point(169, 265);
             this.btnVMSR.Name = "btnVMSR";
-            this.btnVMSR.Size = new System.Drawing.Size(133, 61);
+            this.btnVMSR.Size = new System.Drawing.Size(157, 76);
             this.btnVMSR.TabIndex = 7;
             this.btnVMSR.UseVisualStyleBackColor = true;
             this.btnVMSR.Visible = false;
+            this.btnVMSR.Click += new System.EventHandler(this.btnVMSR_Click);
             // 
             // btnVOfficier
             // 
             this.btnVOfficier.BackgroundImage = global::Gestion_alarme.Properties.Resources.Officier;
             this.btnVOfficier.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnVOfficier.Location = new System.Drawing.Point(6, 220);
+            this.btnVOfficier.Location = new System.Drawing.Point(6, 265);
             this.btnVOfficier.Name = "btnVOfficier";
-            this.btnVOfficier.Size = new System.Drawing.Size(133, 61);
+            this.btnVOfficier.Size = new System.Drawing.Size(157, 76);
             this.btnVOfficier.TabIndex = 6;
             this.btnVOfficier.UseVisualStyleBackColor = true;
             this.btnVOfficier.Visible = false;
+            this.btnVOfficier.Click += new System.EventHandler(this.btnVOfficier_Click);
             // 
             // btnVEchelle30D
             // 
             this.btnVEchelle30D.BackgroundImage = global::Gestion_alarme.Properties.Resources.Echelle30Double;
             this.btnVEchelle30D.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnVEchelle30D.Location = new System.Drawing.Point(145, 153);
+            this.btnVEchelle30D.Location = new System.Drawing.Point(169, 183);
             this.btnVEchelle30D.Name = "btnVEchelle30D";
-            this.btnVEchelle30D.Size = new System.Drawing.Size(133, 61);
+            this.btnVEchelle30D.Size = new System.Drawing.Size(157, 76);
             this.btnVEchelle30D.TabIndex = 5;
             this.btnVEchelle30D.UseVisualStyleBackColor = true;
             this.btnVEchelle30D.Visible = false;
+            this.btnVEchelle30D.Click += new System.EventHandler(this.btnVEchelle30D_Click);
             // 
             // btnVEchelle25S
             // 
             this.btnVEchelle25S.BackgroundImage = global::Gestion_alarme.Properties.Resources.Echelle25Simple;
             this.btnVEchelle25S.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnVEchelle25S.Location = new System.Drawing.Point(6, 153);
+            this.btnVEchelle25S.Location = new System.Drawing.Point(6, 183);
             this.btnVEchelle25S.Name = "btnVEchelle25S";
-            this.btnVEchelle25S.Size = new System.Drawing.Size(133, 61);
+            this.btnVEchelle25S.Size = new System.Drawing.Size(157, 76);
             this.btnVEchelle25S.TabIndex = 4;
             this.btnVEchelle25S.UseVisualStyleBackColor = true;
             this.btnVEchelle25S.Visible = false;
+            this.btnVEchelle25S.Click += new System.EventHandler(this.btnVEchelle25S_Click);
             // 
             // btnVTransportPM
             // 
             this.btnVTransportPM.BackgroundImage = global::Gestion_alarme.Properties.Resources.TPM;
             this.btnVTransportPM.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnVTransportPM.Location = new System.Drawing.Point(145, 86);
+            this.btnVTransportPM.Location = new System.Drawing.Point(169, 101);
             this.btnVTransportPM.Name = "btnVTransportPM";
-            this.btnVTransportPM.Size = new System.Drawing.Size(133, 61);
+            this.btnVTransportPM.Size = new System.Drawing.Size(157, 76);
             this.btnVTransportPM.TabIndex = 3;
             this.btnVTransportPM.UseVisualStyleBackColor = true;
             this.btnVTransportPM.Visible = false;
+            this.btnVTransportPM.Click += new System.EventHandler(this.btnVTransportPM_Click);
             // 
             // btnVTonneP6000
             // 
             this.btnVTonneP6000.BackgroundImage = global::Gestion_alarme.Properties.Resources.TP6000;
             this.btnVTonneP6000.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnVTonneP6000.Location = new System.Drawing.Point(6, 86);
+            this.btnVTonneP6000.Location = new System.Drawing.Point(6, 101);
             this.btnVTonneP6000.Name = "btnVTonneP6000";
-            this.btnVTonneP6000.Size = new System.Drawing.Size(133, 61);
+            this.btnVTonneP6000.Size = new System.Drawing.Size(157, 76);
             this.btnVTonneP6000.TabIndex = 2;
             this.btnVTonneP6000.UseVisualStyleBackColor = true;
             this.btnVTonneP6000.Visible = false;
+            this.btnVTonneP6000.Click += new System.EventHandler(this.btnVTonneP6000_Click);
             // 
             // btnVTonneP2000
             // 
             this.btnVTonneP2000.BackgroundImage = global::Gestion_alarme.Properties.Resources.TP2000;
             this.btnVTonneP2000.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnVTonneP2000.Location = new System.Drawing.Point(145, 19);
+            this.btnVTonneP2000.Location = new System.Drawing.Point(169, 19);
             this.btnVTonneP2000.Name = "btnVTonneP2000";
-            this.btnVTonneP2000.Size = new System.Drawing.Size(133, 61);
+            this.btnVTonneP2000.Size = new System.Drawing.Size(157, 76);
             this.btnVTonneP2000.TabIndex = 1;
             this.btnVTonneP2000.UseVisualStyleBackColor = true;
             this.btnVTonneP2000.Visible = false;
+            this.btnVTonneP2000.Click += new System.EventHandler(this.btnVTonneP2000_Click);
             // 
             // btnVTonneP1000
             // 
@@ -305,15 +316,16 @@
             this.btnVTonneP1000.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnVTonneP1000.Location = new System.Drawing.Point(6, 19);
             this.btnVTonneP1000.Name = "btnVTonneP1000";
-            this.btnVTonneP1000.Size = new System.Drawing.Size(133, 61);
+            this.btnVTonneP1000.Size = new System.Drawing.Size(157, 76);
             this.btnVTonneP1000.TabIndex = 0;
             this.btnVTonneP1000.UseVisualStyleBackColor = true;
             this.btnVTonneP1000.Visible = false;
+            this.btnVTonneP1000.Click += new System.EventHandler(this.btnVTonneP1000_Click);
             // 
             // btnTrain
             // 
             this.btnTrain.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTrain.Location = new System.Drawing.Point(684, 473);
+            this.btnTrain.Location = new System.Drawing.Point(684, 496);
             this.btnTrain.Name = "btnTrain";
             this.btnTrain.Size = new System.Drawing.Size(183, 27);
             this.btnTrain.TabIndex = 17;
@@ -331,11 +343,57 @@
             this.btnQuittance.UseVisualStyleBackColor = true;
             this.btnQuittance.Click += new System.EventHandler(this.btnQuittance_Click);
             // 
+            // rdbtnAdd
+            // 
+            this.rdbtnAdd.AutoSize = true;
+            this.rdbtnAdd.Checked = true;
+            this.rdbtnAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdbtnAdd.Location = new System.Drawing.Point(690, 415);
+            this.rdbtnAdd.Name = "rdbtnAdd";
+            this.rdbtnAdd.Size = new System.Drawing.Size(36, 24);
+            this.rdbtnAdd.TabIndex = 19;
+            this.rdbtnAdd.TabStop = true;
+            this.rdbtnAdd.Text = "+";
+            this.rdbtnAdd.UseVisualStyleBackColor = true;
+            // 
+            // rdbtnRemove
+            // 
+            this.rdbtnRemove.AutoSize = true;
+            this.rdbtnRemove.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdbtnRemove.Location = new System.Drawing.Point(732, 415);
+            this.rdbtnRemove.Name = "rdbtnRemove";
+            this.rdbtnRemove.Size = new System.Drawing.Size(32, 24);
+            this.rdbtnRemove.TabIndex = 20;
+            this.rdbtnRemove.Text = "-";
+            this.rdbtnRemove.UseVisualStyleBackColor = true;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(394, 422);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(152, 13);
+            this.label1.TabIndex = 22;
+            this.label1.Text = "Liste de véhicules sélectionner";
+            // 
+            // lstVSelection
+            // 
+            this.lstVSelection.FormattingEnabled = true;
+            this.lstVSelection.Location = new System.Drawing.Point(397, 437);
+            this.lstVSelection.Name = "lstVSelection";
+            this.lstVSelection.SelectionMode = System.Windows.Forms.SelectionMode.None;
+            this.lstVSelection.Size = new System.Drawing.Size(246, 95);
+            this.lstVSelection.TabIndex = 23;
+            // 
             // InterfaceGraphique
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1038, 602);
+            this.Controls.Add(this.lstVSelection);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.rdbtnRemove);
+            this.Controls.Add(this.rdbtnAdd);
             this.Controls.Add(this.btnQuittance);
             this.Controls.Add(this.btnTrain);
             this.Controls.Add(this.grpMoyens);
@@ -393,6 +451,10 @@
         private System.Windows.Forms.Button btnVTransportPM;
         private System.Windows.Forms.Button btnVTonneP6000;
         private System.Windows.Forms.Button btnVTonneP2000;
+        private System.Windows.Forms.RadioButton rdbtnAdd;
+        private System.Windows.Forms.RadioButton rdbtnRemove;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ListBox lstVSelection;
     }
 }
 
