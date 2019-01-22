@@ -69,15 +69,6 @@ namespace Gestion_alarme
 
             #endregion Liste intervention
 
-            //ajout des item dans la liste du status d'intervention
-            //TO DO : à adapter avec la DB
-            /*rqSQL = "SELECT * from alarme_status";
-              //Sert à envoyer la requête voulue à la classe qui s'en occupe
-              MySqlDataAdapter data = new MySqlDataAdapter(rqSQL, connection.conn);
-              DataSet Ds = new DataSet();
-              Ds.Reset();
-              data.Fill(Ds, rqSQL);*/
-
             #region Status d'intervention
 
             rqSQL = "SELECT Status from alarme_status";
@@ -161,6 +152,7 @@ namespace Gestion_alarme
             #endregion Verification des champs
 
             #region Envoie requête db
+            rqSQL = "insert into alarme values()";
             //Sert à envoyer la requête voulue à la classe qui s'en occupe
             /*MySqlDataAdapter data = new MySqlDataAdapter(rqSQL, connection.conn);
             DataSet Ds = new DataSet();
