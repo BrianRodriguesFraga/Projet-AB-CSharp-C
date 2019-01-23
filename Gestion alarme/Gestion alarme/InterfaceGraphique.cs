@@ -124,7 +124,103 @@ namespace Gestion_alarme
             #endregion Liste SDIS
         }
 
-        #region Liste des personnes des SDIS
+        private void btnQuittance_Click(object sender, EventArgs e)
+        {
+            #region Variables local
+            //met erreur à false pour vérifier par la suite si il y a des erreurs dans les champs
+            erreur = false;
+            string rqSQL = "";
+            #endregion Variables local
+
+            #region Verification des champs
+            //processus de vérification de tout les champs
+            if (txtQui.TextLength <= 0) { MessageBox.Show("Le champ 'Qui ?' est vide !", "Erreur ! Champ vide.", MessageBoxButtons.OK, MessageBoxIcon.Error); erreur = true; }
+            else if (lstTypeInter.SelectedIndex < 0) { MessageBox.Show("Aucun index n'a été selectionner dans 'Type Intervention' !", "Erreur ! Index non selectionné.", MessageBoxButtons.OK, MessageBoxIcon.Error); erreur = true; }
+            else if (txtLieu.TextLength <= 0) { MessageBox.Show("Le champ 'Lieu' est vide !", "Erreur ! Champ vide.", MessageBoxButtons.OK, MessageBoxIcon.Error); erreur = true; }
+            else if (txtStatus.Text == "") { MessageBox.Show("Le champ 'Status de l'intervention' est vide ! \nSelectionnez le type de status", "Erreur ! Champ vide.", MessageBoxButtons.OK, MessageBoxIcon.Error); erreur = true; }
+            //si un champ est vide, demande à l'utilisateur une confirmation
+            if ((SiteSinistre.TextLength <= 0 || SiteSinistre.Text == "Zone touchée") && (erreur == false && alerte == false)) {
+                var SiteSinistreRep = MessageBox.Show("Le champ 'Zone touchée ?' est vide ! Voulez-vous continuez ?", "Champ vide ?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (SiteSinistreRep != DialogResult.Yes) { erreur = true; }
+            }
+            if (rtxtRemarques.TextLength <= 0 && (erreur == false && alerte == false))
+            {
+                var rtxtRemarquesRep = MessageBox.Show("Le champ 'Remarque' est vide ! Voulez-vous continuez ?", "Champ vide ?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (rtxtRemarquesRep != DialogResult.Yes) { erreur = true; }
+            }
+            #endregion Verification des champs
+
+            #region Envoie requête db
+            rqSQL = "insert into alarme values()";
+            //Sert à envoyer la requête voulue à la classe qui s'en occupe
+            /*MySqlDataAdapter data = new MySqlDataAdapter(rqSQL, connection.conn);
+            DataSet Ds = new DataSet();
+            Ds.Reset();
+            data.Fill(Ds, rqSQL);*/
+            #endregion Envoie requête db
+
+            #region Validation de l'alerte
+            //Si il y a aucune erreur, on lance l'alerte
+            if (erreur == false && alerte == false)
+            {
+                //Affiche le message que l'alerte à bien été envoyé
+                MessageBox.Show("L'alerte a été envoyée !", "Envoyée !", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                //on verrouille tous les champs necessaire qui ne doivent pas être modifier
+                txtQui.Enabled = false;
+                lstTypeInter.Enabled = false;
+                SiteSinistre.Enabled = false;
+                txtLieu.Enabled = false;
+                rtxtRemarques.Enabled = false;
+                lstSDIS.Enabled = false;
+                btnTrain.Enabled = false;
+                btnQuittance.Text = "Terminer l'intervention";
+                alerte = true;
+
+                //TO DO : mettre la requete pour la base de données
+            }
+
+            //Si l'alerte est déjà envoyé et qu'il y a aucune erreur dans les champs
+            else if (erreur == false && alerte == true)
+            {
+                //Et si le status est défini sur Terminée ou Annulée, on reactive tout les champs et les remets à zéro pour être prêt à lancer une nouvelle alerte
+                if (txtStatus.Text == "Terminée !" || txtStatus.Text == "Annulée !")
+                {
+                    MessageBox.Show("L'intervention sur les lieux est terminer.", "Terminer !", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    txtQui.Enabled = true;
+                    txtQui.Text = "";
+                    lstTypeInter.Enabled = true;
+                    lstTypeInter.Text = "";
+                    SiteSinistre.Enabled = true;
+                    SiteSinistre.Text = "";
+                    txtLieu.Enabled = true;
+                    txtLieu.Text = "";
+                    rtxtRemarques.Enabled = true;
+                    rtxtRemarques.Text = "";
+                    lstSDIS.Enabled = true;
+                    rtxtRemarques.Text = "";
+                    btnTrain.Enabled = true;
+                    lstTypeInter.SelectedIndex = -1;
+                    lstSDIS.SelectedIndex = -1;
+                    lstEngagement.Items.Clear();
+                    SiteSinistre.Text = "Zone touchée";
+                    SiteSinistre.ForeColor = Color.Gray;
+                    btnQuittance.Text = "Quittancer";
+                    alerte = false;
+
+                    //TO DO : mettre la requette pour la base de données
+                }
+                //sinon, renvoie un message d'erreur
+                else
+                {
+                    MessageBox.Show("Le status de l'intervention n'est pas terminée ou annulée.", "Erreur !", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            #endregion Validation de l'alerte
+        }
+
+
         private void lstSDIS_SelectedIndexChanged(object sender, EventArgs e)
         {
             //afficher la liste des personnes engagées selon le SDIS sélectionné
@@ -821,5 +917,3 @@ namespace Gestion_alarme
 '''''''''''''''''''''''';#+++++++++++#+++++++++++++#;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;@+++++++++@++++@,:++++++#@++++++++#+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;#+++++++#++++++++++++++++++++++++++++++++++++
 '''''''''''''''''''''''';+++++++++++++++++++++++++++;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;#+++++++++#++++@,+++++++@#++++++++#;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;#+++++++#++++++++++++++++++++++++++++++++++++
 */
-
-
