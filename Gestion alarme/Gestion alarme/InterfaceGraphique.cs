@@ -412,9 +412,6 @@ namespace Gestion_alarme
                 Ds.Reset();
                 data.Fill(Ds, rqSQL);
 
-                //Affiche le message que l'alerte à bien été envoyé
-                MessageBox.Show("L'alerte a été envoyée !", "Envoyée !", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
                 //on verrouille tous les champs necessaire qui ne doivent pas être modifier
                 txtQui.Enabled = false;
                 lstTypeInter.Enabled = false;
@@ -423,9 +420,21 @@ namespace Gestion_alarme
                 rtxtRemarques.Enabled = false;
                 lstSDIS.Enabled = false;
                 btnTrain.Enabled = false;
+                btnVEchelle25S.Enabled = false;
+                btnVEchelle30D.Enabled = false;
+                btnVMSR.Enabled = false;
+                btnVOfficier.Enabled = false;
+                btnVTonneP1000.Enabled = false;
+                btnVTonneP2000.Enabled = false;
+                btnVTonneP6000.Enabled = false;
+                btnVTransportPM.Enabled = false;
                 btnQuittance.Text = "Terminer l'intervention";
                 alerte = true;
-                }
+
+                //Affiche le message que l'alerte à bien été envoyé
+                MessageBox.Show("L'alerte a été envoyée !", "Envoyée !", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            }
             #endregion Si 0 erreur
 
             #region Si alerte actif
