@@ -54,7 +54,6 @@
             this.btnVTonneP6000 = new System.Windows.Forms.Button();
             this.btnVTonneP2000 = new System.Windows.Forms.Button();
             this.btnVTonneP1000 = new System.Windows.Forms.Button();
-            this.btnTrain = new System.Windows.Forms.Button();
             this.btnQuittance = new System.Windows.Forms.Button();
             this.rdbtnAdd = new System.Windows.Forms.RadioButton();
             this.rdbtnRemove = new System.Windows.Forms.RadioButton();
@@ -322,16 +321,6 @@
             this.btnVTonneP1000.Visible = false;
             this.btnVTonneP1000.Click += new System.EventHandler(this.btnVTonneP1000_Click);
             // 
-            // btnTrain
-            // 
-            this.btnTrain.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTrain.Location = new System.Drawing.Point(684, 496);
-            this.btnTrain.Name = "btnTrain";
-            this.btnTrain.Size = new System.Drawing.Size(183, 27);
-            this.btnTrain.TabIndex = 17;
-            this.btnTrain.Text = "Mobiliser le train d\'intervention";
-            this.btnTrain.UseVisualStyleBackColor = true;
-            // 
             // btnQuittance
             // 
             this.btnQuittance.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -395,7 +384,6 @@
             this.Controls.Add(this.rdbtnRemove);
             this.Controls.Add(this.rdbtnAdd);
             this.Controls.Add(this.btnQuittance);
-            this.Controls.Add(this.btnTrain);
             this.Controls.Add(this.grpMoyens);
             this.Controls.Add(this.lstEngagement);
             this.Controls.Add(this.lstSDIS);
@@ -440,7 +428,6 @@
         private System.Windows.Forms.ComboBox lstSDIS;
         private System.Windows.Forms.ListBox lstEngagement;
         private System.Windows.Forms.GroupBox grpMoyens;
-        private System.Windows.Forms.Button btnTrain;
         private System.Windows.Forms.Button btnQuittance;
         private System.Windows.Forms.ComboBox lstInterCourantes;
         private System.Windows.Forms.Button btnVTonneP1000;

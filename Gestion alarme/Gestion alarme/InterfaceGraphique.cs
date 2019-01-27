@@ -404,9 +404,17 @@ namespace Gestion_alarme
                 int idCaserne = lstSDIS.SelectedIndex + 1;
                 int idSinistre = lstTypeInter.SelectedIndex + 1;
                 int idStatus = GetSelectedStatusId();
+                string Qui = txtQui.Text;
+                string SQLqui = RemoveSpecialChars(Qui);
+                string Zone_touchee = SiteSinistre.Text;
+                string SQLZone_touchee = RemoveSpecialChars(Zone_touchee);
+                string Lieu = txtLieu.Text;
+                string SQLLieu = RemoveSpecialChars(Lieu);
+                string remarque = rtxtRemarques.Text;
+                string SQLremarque = RemoveSpecialChars(remarque);
 
                 //Sert à envoyer la requête voulue à la classe qui s'en occupe
-                rqSQL = "INSERT INTO Alarme (Caserne_idCaserne, Type_sinistre_idType_sinistre, Alarme_status_idAlarme_status) VALUES ('" + idCaserne + "','" + idSinistre + "','" + idStatus + "');";
+                rqSQL = "INSERT INTO Alarme (Caserne_idCaserne, Type_sinistre_idType_sinistre, Alarme_status_idAlarme_status, Qui, Zone_touchee, Lieu, Description) VALUES ('" + idCaserne + "','" + idSinistre + "','" + idStatus + "','" + SQLqui + "','" + SQLZone_touchee + "','" + SQLLieu + "','" + SQLremarque + "');";
                 MySqlDataAdapter data = new MySqlDataAdapter(rqSQL, connection.conn);
                 DataSet Ds = new DataSet();
                 Ds.Reset();
@@ -419,7 +427,6 @@ namespace Gestion_alarme
                 txtLieu.Enabled = false;
                 rtxtRemarques.Enabled = false;
                 lstSDIS.Enabled = false;
-                btnTrain.Enabled = false;
                 btnVEchelle25S.Enabled = false;
                 btnVEchelle30D.Enabled = false;
                 btnVMSR.Enabled = false;
@@ -428,6 +435,8 @@ namespace Gestion_alarme
                 btnVTonneP2000.Enabled = false;
                 btnVTonneP6000.Enabled = false;
                 btnVTransportPM.Enabled = false;
+                rdbtnAdd.Enabled = false;
+                rdbtnRemove.Enabled = false;
                 btnQuittance.Text = "Terminer l'intervention";
                 alerte = true;
 
@@ -467,10 +476,13 @@ namespace Gestion_alarme
                     rtxtRemarques.Text = "";
                     lstSDIS.Enabled = true;
                     rtxtRemarques.Text = "";
-                    btnTrain.Enabled = true;
                     lstTypeInter.SelectedIndex = -1;
                     lstSDIS.SelectedIndex = -1;
                     lstEngagement.Items.Clear();
+                    lstVSelection.Items.Clear();
+                    txtStatus.Text = "";
+                    rdbtnAdd.Enabled = true;
+                    rdbtnRemove.Enabled = true;
                     SiteSinistre.Text = "Zone touchée";
                     SiteSinistre.ForeColor = Color.Gray;
                     btnQuittance.Text = "Quittancer";
@@ -583,6 +595,20 @@ namespace Gestion_alarme
             AlerteI.Close();
 
             return TopID;
+        }
+        public static string RemoveSpecialChars(string str)
+        {
+            // Create  a string array and add the special characters you want to remove
+            string[] chars = new string[] { "/", "@", "#", "$", "%", "^", "&", "*", "'", "\"", ";", "|", "[", "]" };
+            //Iterate the number of times based on the String array length.
+            for (int i = 0; i < chars.Length; i++)
+            {
+                if (str.Contains(chars[i]))
+                {
+                    str = str.Replace(chars[i], " ");
+                }
+            }
+            return str;
         }
         #endregion Fonctions
     }
